@@ -42,6 +42,16 @@ namespace PasswordMgr_WinForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtSystemname.Text.Trim()) &&
+                String.IsNullOrEmpty(txtUsername.Text.Trim()) &&
+                String.IsNullOrEmpty(txtEmail.Text.Trim()) &&
+                String.IsNullOrEmpty(txtPassword.Text.Trim()) &&
+                String.IsNullOrEmpty(txtWebsite.Text.Trim()))
+            {
+                MessageBox.Show("Lack of important value!");
+                return;
+            }
+
             PasswordItem newItem = new PasswordItem();
             newItem.Systemname = txtSystemname.Text.Trim();
             newItem.Username = txtUsername.Text.Trim();
@@ -52,7 +62,11 @@ namespace PasswordMgr_WinForm
             newItem.Website = txtWebsite.Text.Trim();
             newItem.Notes = txtNotes.Text.Trim();
 
-            viewModel.InsertNewItem(newItem);
+            viewModel.InitDatabase(txtDBPath.Text.Trim());
+            if (viewModel.InsertNewItem(newItem))
+            {
+                MessageBox.Show("Insert a new item successfully!");
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)

@@ -13,7 +13,6 @@ namespace PasswordMgr_WinForm
 {
     class PasswordMgrViewModel
     {
-        public string DataFileLocation;
         private const string gTableName = "passwordtb";
 
         private ObservableCollection<PasswordItem> gList;
@@ -25,65 +24,69 @@ namespace PasswordMgr_WinForm
             gList = new ObservableCollection<PasswordItem>();
         }
 
-        public bool LoadDBFile(string databaseURL)
+        public void InitDatabase(string databaseURL)
         {
             if (File.Exists(databaseURL))
             {
                 DBOperation.connectionString = "Data Source=" + databaseURL;
-                DataTable dt = null;
-                dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName);
-                foreach (DataRow row in dt.Rows)
-                {
-                    PasswordItem newPass = null;
-                    int count = row.ItemArray.Length;
-
-                    switch (count)
-                    {
-                        case 0:
-                            newPass = new PasswordItem(row.ItemArray[count].ToString());
-                            break;
-                        case 1:
-                            newPass.Systemname = row.ItemArray[count].ToString();
-                            break;
-                        case 2:
-                            newPass.Username = row.ItemArray[count].ToString();
-                            break;
-                        case 3:
-                            newPass.Nickname = row.ItemArray[count].ToString();
-                            break;
-                        case 4:
-                            newPass.Email = row.ItemArray[count].ToString();
-                            break;
-                        case 5:
-                            newPass.FEmailIsLogin = bool.Parse(row.ItemArray[count].ToString());
-                            break;
-                        case 6:
-                            newPass.Password = row.ItemArray[count].ToString();
-                            break;
-                        case 7:
-                            newPass.Website = row.ItemArray[count].ToString();
-                            break;
-                        case 8:
-                            newPass.Notes = row.ItemArray[count].ToString();
-                            break;
-                        case 9:
-                            newPass.CreatedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
-                            break;
-                        case 10:
-                            newPass.LastModifiedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
-                            break;
-                        default:
-                            System.Diagnostics.Debug.Assert(false, "Additional Column?");
-                            break;
-                    }
-
-                    gList.Add(newPass);
-                }
-
-                return true;
             }
             else
-                return false;
+                DialogHelper.ShowExcetion(new Exception("Database file doesn't exist"), "InitDatabase");
+        }
+
+        public bool LoadDataFromDB()
+        {
+            DataTable dt = null;
+            dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName);
+            foreach (DataRow row in dt.Rows)
+            {
+                PasswordItem newPass = null;
+                int count = row.ItemArray.Length;
+
+                switch (count)
+                {
+                    case 0:
+                        newPass = new PasswordItem(row.ItemArray[count].ToString());
+                        break;
+                    case 1:
+                        newPass.Systemname = row.ItemArray[count].ToString();
+                        break;
+                    case 2:
+                        newPass.Username = row.ItemArray[count].ToString();
+                        break;
+                    case 3:
+                        newPass.Nickname = row.ItemArray[count].ToString();
+                        break;
+                    case 4:
+                        newPass.Email = row.ItemArray[count].ToString();
+                        break;
+                    case 5:
+                        newPass.FEmailIsLogin = bool.Parse(row.ItemArray[count].ToString());
+                        break;
+                    case 6:
+                        newPass.Password = row.ItemArray[count].ToString();
+                        break;
+                    case 7:
+                        newPass.Website = row.ItemArray[count].ToString();
+                        break;
+                    case 8:
+                        newPass.Notes = row.ItemArray[count].ToString();
+                        break;
+                    case 9:
+                        newPass.CreatedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
+                        break;
+                    case 10:
+                        newPass.LastModifiedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
+                        break;
+                    default:
+                        System.Diagnostics.Debug.Assert(false, "Additional Column?");
+                        break;
+                }
+
+                gList.Add(newPass);
+            }
+
+            return true;
         }
 
         public bool InsertNewItem(PasswordItem passItem)

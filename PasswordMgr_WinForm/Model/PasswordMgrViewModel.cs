@@ -15,13 +15,20 @@ namespace PasswordMgr_WinForm
     {
         private const string gTableName = "passwordtb";
 
-        private ObservableCollection<PasswordItem> gList;
+        private ObservableCollection<PasswordItem> passItemList;
+        public ObservableCollection<PasswordItem> PassItemList
+        {
+            get
+            {
+                return passItemList;
+            }
+        }
 
         public event EventHandler PasswordSaved;
 
         public PasswordMgrViewModel()
         { 
-            gList = new ObservableCollection<PasswordItem>();
+            passItemList = new ObservableCollection<PasswordItem>();
         }
 
         public void InitDatabase(string databaseURL)
@@ -43,47 +50,50 @@ namespace PasswordMgr_WinForm
                 PasswordItem newPass = null;
                 int count = row.ItemArray.Length;
 
-                switch (count)
+                for (int index = 0; index < count; index++)
                 {
-                    case 0:
-                        newPass = new PasswordItem(row.ItemArray[count].ToString());
-                        break;
-                    case 1:
-                        newPass.Systemname = row.ItemArray[count].ToString();
-                        break;
-                    case 2:
-                        newPass.Username = row.ItemArray[count].ToString();
-                        break;
-                    case 3:
-                        newPass.Nickname = row.ItemArray[count].ToString();
-                        break;
-                    case 4:
-                        newPass.Email = row.ItemArray[count].ToString();
-                        break;
-                    case 5:
-                        newPass.FEmailIsLogin = bool.Parse(row.ItemArray[count].ToString());
-                        break;
-                    case 6:
-                        newPass.Password = row.ItemArray[count].ToString();
-                        break;
-                    case 7:
-                        newPass.Website = row.ItemArray[count].ToString();
-                        break;
-                    case 8:
-                        newPass.Notes = row.ItemArray[count].ToString();
-                        break;
-                    case 9:
-                        newPass.CreatedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
-                        break;
-                    case 10:
-                        newPass.LastModifiedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[count].ToString());
-                        break;
-                    default:
-                        System.Diagnostics.Debug.Assert(false, "Additional Column?");
-                        break;
+                    switch (index)
+                    {
+                        case 0:
+                            newPass = new PasswordItem(row.ItemArray[index].ToString());
+                            break;
+                        case 1:
+                            newPass.Systemname = row.ItemArray[index].ToString();
+                            break;
+                        case 2:
+                            newPass.Username = row.ItemArray[index].ToString();
+                            break;
+                        case 3:
+                            newPass.Nickname = row.ItemArray[index].ToString();
+                            break;
+                        case 4:
+                            newPass.Email = row.ItemArray[index].ToString();
+                            break;
+                        case 5:
+                            newPass.FEmailIsLogin = row.ItemArray[index].ToString() == "1" ? true : false;
+                            break;
+                        case 6:
+                            newPass.Password = row.ItemArray[index].ToString();
+                            break;
+                        case 7:
+                            newPass.Website = row.ItemArray[index].ToString();
+                            break;
+                        case 8:
+                            newPass.Notes = row.ItemArray[index].ToString();
+                            break;
+                        case 9:
+                            newPass.CreatedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[index].ToString());
+                            break;
+                        case 10:
+                            newPass.LastModifiedDate = BaseClassHelper.DateTimeFromString(row.ItemArray[index].ToString());
+                            break;
+                        default:
+                            System.Diagnostics.Debug.Assert(false, "Additional Column?");
+                            break;
+                    }
                 }
 
-                gList.Add(newPass);
+                passItemList.Add(newPass);
             }
 
             return true;

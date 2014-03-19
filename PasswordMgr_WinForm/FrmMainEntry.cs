@@ -29,9 +29,10 @@ namespace PasswordMgr_WinForm
 
         private void FrmMainEntry_Load(object sender, EventArgs e)
         {
-            this.Name = GlobalConfig.AppName;
+            this.Text = GlobalConfig.AppName;
 
             txtDBPath.Text = GlobalConfig.LoadConfig();
+            viewModel.InitDatabase(txtDBPath.Text.Trim());
 
             openFileDialog1.Filter = "Database file|*.db|All files|*.*";
             openFileDialog1.Multiselect = false;
@@ -62,7 +63,6 @@ namespace PasswordMgr_WinForm
             newItem.Website = txtWebsite.Text.Trim();
             newItem.Notes = txtNotes.Text.Trim();
 
-            viewModel.InitDatabase(txtDBPath.Text.Trim());
             if (viewModel.InsertNewItem(newItem))
             {
                 MessageBox.Show("Insert a new item successfully!");

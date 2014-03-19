@@ -9,6 +9,11 @@ namespace PasswordMgr_WinForm
 {
     public class DialogHelper
     {
+        public static void ShowMessage(string content, string title = "")
+        {
+            MessageBox.Show(content, title);
+        }
+
         public static void ShowExcetion(Exception ex, string title = "")
         {
             MessageBox.Show(ex.ToString(), title);

@@ -31,17 +31,17 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnInsert = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -75,9 +75,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.btnDelete);
+            this.tabPage1.Controls.Add(this.btnInsert);
+            this.tabPage1.Controls.Add(this.btnUpdate);
             this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -86,6 +86,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data List";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnDelete.Location = new System.Drawing.Point(439, 438);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 31);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnInsert
+            // 
+            this.btnInsert.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnInsert.Location = new System.Drawing.Point(219, 437);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(75, 31);
+            this.btnInsert.TabIndex = 1;
+            this.btnInsert.Text = "Insert";
+            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnUpdate.Location = new System.Drawing.Point(329, 437);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 31);
+            this.btnUpdate.TabIndex = 0;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // tabPage2
             // 
@@ -98,6 +131,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Option";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(18, 143);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 26);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "Reload All";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -113,23 +155,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // button1
+            // comboBox1
             // 
-            this.button1.Location = new System.Drawing.Point(203, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(62, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Go";
-            this.button1.UseVisualStyleBackColor = true;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(76, 61);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(109, 21);
+            this.comboBox1.TabIndex = 4;
             // 
-            // label1
+            // textBox1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Keywords";
+            this.textBox1.Location = new System.Drawing.Point(76, 28);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(189, 20);
+            this.textBox1.TabIndex = 3;
             // 
             // label2
             // 
@@ -140,59 +179,23 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "By Type";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(76, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Keywords";
             // 
-            // comboBox1
+            // button1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(76, 61);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(109, 21);
-            this.comboBox1.TabIndex = 4;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button2.Location = new System.Drawing.Point(329, 437);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 31);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button3.Location = new System.Drawing.Point(219, 437);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 31);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Insert";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button4.Location = new System.Drawing.Point(439, 438);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 31);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(18, 143);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 26);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Reload All";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(203, 59);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(62, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Go";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FrmList
             // 
@@ -225,9 +228,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnInsert;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button button5;
     }
 }

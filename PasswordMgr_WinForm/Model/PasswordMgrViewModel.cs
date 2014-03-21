@@ -24,7 +24,9 @@ namespace PasswordMgr_WinForm
             }
         }
 
-        public event EventHandler PasswordSaved;
+        public event EventHandler OnPasswordItemInserted;
+        public event EventHandler OnPasswordItemUpdated;
+        public event EventHandler OnPasswordItemDeleted;
 
         public PasswordMgrViewModel()
         { 
@@ -125,8 +127,61 @@ namespace PasswordMgr_WinForm
             else
                 status = true;
 
-            if (PasswordSaved != null)
-                PasswordSaved(null, null);
+            if (OnPasswordItemInserted != null)
+                OnPasswordItemInserted(null, null);
+            return status;
+        }
+
+        public bool UpdatePassItem(PasswordItem passItem)
+        {
+            bool status = false;
+
+            string cmdText = "UPDATE " + gTableName +
+                " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
+                ",password=@password,website=@website,notes=@notes,createdate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
+            Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
+                "@id", passItem.ID,
+                "@systemname", passItem.Systemname,
+                "@username", passItem.Username,
+                "@nickname", passItem.Nickname,
+                "@email", passItem.Email,
+                "@fEmailIsLogin", passItem.FEmailIsLogin,
+                "@password", passItem.Password,
+                "@website", passItem.Website,
+                "@notes", passItem.Notes,
+                "@createdDate", passItem.CreatedDate,
+                "@lastModifiedDate", passItem.LastModifiedDate);
+            if (ret != null)
+            {
+                DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                status = false;
+            }
+            else
+                status = true;
+
+            if (OnPasswordItemUpdated != null)
+                OnPasswordItemUpdated(null, null);
+            return status;
+        }
+
+        public bool DeletePassItem(PasswordItem passItem)
+        {
+            bool status = false;
+
+            string cmdText = "DELETE FROM " + gTableName +
+                " WHERE id=@id";
+            Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
+                "@id", passItem.ID);
+            if (ret != null)
+            {
+                DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                status = false;
+            }
+            else
+                status = true;
+
+            if (OnPasswordItemDeleted != null)
+                OnPasswordItemDeleted(null, null);
             return status;
         }
 

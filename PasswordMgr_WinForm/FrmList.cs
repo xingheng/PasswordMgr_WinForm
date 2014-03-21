@@ -68,8 +68,57 @@ namespace PasswordMgr_WinForm
                         item.LastModifiedDate.ToShortDateString()
                     }
                 );
+                viewItem.Tag = item;    // Save the data source in Tag to get it easily.
                 listView1.Items.Add(viewItem);
             }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            FrmMainEntry newFrm = new FrmMainEntry();
+            newFrm.ShowDialog();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            PasswordItem selectedItem;
+            if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
+            {
+                // TODO: How to update? Show the data source in FrmMainEntry?
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            PasswordItem selectedItem;
+            if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
+            {
+                if (DialogResult.OK == MessageBox.Show(selectedItem.ToString(), "Delete"))
+                {
+                    if (viewModel.DeletePassItem(selectedItem))
+                    {
+                        MessageBox.Show(selectedItem.ToString(), "Deleted");
+                    }
+                }
+            }
+        }
+
+        private bool GetSeletedPassItem(out PasswordItem item)
+        {
+            bool result = false;
+
+            var list = listView1.SelectedItems;
+            if (list.Count > 0)
+            {
+                ListViewItem viewItem = list[0];
+                item = viewItem.Tag as PasswordItem;
+                if (item != null)
+                    result = true;
+            }
+            else
+                item = null;
+
+            return result;
         }
     }
 }

@@ -114,5 +114,11 @@ namespace PasswordMgr_WinForm
             this.Notes = anotes;
         }
         #endregion
+
+        public override string ToString()
+        {
+            return string.Format("ID:{0}, System name: {1}, User name:{2}, Nick name: {3}, Email:{4}, FEmailIsLogin:{5}, Password:{6}, Website:{7}, Notes:{8}, CreatedDate:{9}, LastModifiedDate:{10}",
+                this.ID, this.Systemname, this.Username, this.Nickname, this.Email, this.FEmailIsLogin, this.Password, this.Website, this.Notes, this.CreatedDate, this.LastModifiedDate);
+        }
     }
 }

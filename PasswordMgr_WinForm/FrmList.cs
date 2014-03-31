@@ -41,6 +41,11 @@ namespace PasswordMgr_WinForm
             listView1.MultiSelect = true;
             listView1.FullRowSelect = true;
 
+            // search condition
+            cBoxSearchType.Items.Add("Any");
+            cBoxSearchType.Items.Add("Username");
+            cBoxSearchType.Items.Add("Email");
+
 
             if (viewModel.LoadDataFromDB())
             {
@@ -119,6 +124,43 @@ namespace PasswordMgr_WinForm
                 item = null;
 
             return result;
+        }
+
+        private void btnReloadAll_Click(object sender, EventArgs e)
+        {
+            if (viewModel.LoadDataFromDB())
+            {
+                InitListViewData(viewModel.PassItemList);
+            }
+            else
+                DialogHelper.ShowMessage("Failed to load data from database.");
+
+            tabPage1.Focus();
+        }
+
+        private void btnGoSearch_Click(object sender, EventArgs e)
+        {
+            string strFilter = " where ";
+            switch (cBoxSearchType.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    strFilter += "username =" + txtKeywords.Text.Trim();
+                    break;
+                case 2:
+                    strFilter += "email =" + txtKeywords.Text.Trim();
+                    break;
+            }
+
+            if (viewModel.LoadDataFromDB(strFilter))
+            {
+                InitListViewData(viewModel.PassItemList);
+            }
+            else
+                DialogHelper.ShowMessage("Failed to load data from database.");
+
+            tabPage1.Focus();
         }
     }
 }

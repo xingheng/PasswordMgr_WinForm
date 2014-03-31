@@ -43,10 +43,10 @@ namespace PasswordMgr_WinForm
                 DialogHelper.ShowExcetion(new Exception("Database file doesn't exist"), "InitDatabase");
         }
 
-        public bool LoadDataFromDB()
+        public bool LoadDataFromDB(string filterString = "")
         {
             DataTable dt = null;
-            dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName);
+            dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName + filterString);
             foreach (DataRow row in dt.Rows)
             {
                 PasswordItem newPass = null;

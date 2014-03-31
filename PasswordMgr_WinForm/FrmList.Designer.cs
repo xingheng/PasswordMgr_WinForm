@@ -35,13 +35,13 @@
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnReloadAll = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cBoxSearchType = new System.Windows.Forms.ComboBox();
+            this.txtKeywords = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGoSearch = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -122,7 +122,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.btnReloadAll);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -132,22 +132,23 @@
             this.tabPage2.Text = "Option";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnReloadAll
             // 
-            this.button5.Location = new System.Drawing.Point(18, 143);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 26);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Reload All";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnReloadAll.Location = new System.Drawing.Point(18, 143);
+            this.btnReloadAll.Name = "btnReloadAll";
+            this.btnReloadAll.Size = new System.Drawing.Size(104, 26);
+            this.btnReloadAll.TabIndex = 1;
+            this.btnReloadAll.Text = "Reload All";
+            this.btnReloadAll.UseVisualStyleBackColor = true;
+            this.btnReloadAll.Click += new System.EventHandler(this.btnReloadAll_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.cBoxSearchType);
+            this.groupBox1.Controls.Add(this.txtKeywords);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnGoSearch);
             this.groupBox1.Location = new System.Drawing.Point(18, 17);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(296, 109);
@@ -155,20 +156,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // comboBox1
+            // cBoxSearchType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(76, 61);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(109, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cBoxSearchType.FormattingEnabled = true;
+            this.cBoxSearchType.Location = new System.Drawing.Point(76, 61);
+            this.cBoxSearchType.Name = "cBoxSearchType";
+            this.cBoxSearchType.Size = new System.Drawing.Size(109, 21);
+            this.cBoxSearchType.TabIndex = 4;
             // 
-            // textBox1
+            // txtKeywords
             // 
-            this.textBox1.Location = new System.Drawing.Point(76, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtKeywords.Location = new System.Drawing.Point(76, 28);
+            this.txtKeywords.Name = "txtKeywords";
+            this.txtKeywords.Size = new System.Drawing.Size(189, 20);
+            this.txtKeywords.TabIndex = 3;
             // 
             // label2
             // 
@@ -188,14 +189,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords";
             // 
-            // button1
+            // btnGoSearch
             // 
-            this.button1.Location = new System.Drawing.Point(203, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(62, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Go";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGoSearch.Location = new System.Drawing.Point(203, 59);
+            this.btnGoSearch.Name = "btnGoSearch";
+            this.btnGoSearch.Size = new System.Drawing.Size(62, 23);
+            this.btnGoSearch.TabIndex = 0;
+            this.btnGoSearch.Text = "Go";
+            this.btnGoSearch.UseVisualStyleBackColor = true;
+            this.btnGoSearch.Click += new System.EventHandler(this.btnGoSearch_Click);
             // 
             // FrmList
             // 
@@ -223,14 +225,14 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cBoxSearchType;
+        private System.Windows.Forms.TextBox txtKeywords;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGoSearch;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnReloadAll;
     }
 }

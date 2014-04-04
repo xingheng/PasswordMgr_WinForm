@@ -19,12 +19,29 @@ namespace PasswordMgr_WinForm
     {
         PasswordMgrViewModel viewModel;
 
-        public DialogResultInfo gFormToShow = DialogResultInfo.None;
+        public DialogResultInfo ShouldGoWhichOne = DialogResultInfo.None;
+        public event EventHandler AfterFormClosed;
 
         public FrmMainEntry()
         {
             InitializeComponent();
             viewModel = new PasswordMgrViewModel();
+        }
+
+        public FrmMainEntry(PasswordItem passItem)
+            : this()
+        {
+            if (passItem != null)
+            {
+                txtSystemname.Text = passItem.Systemname;
+                txtUsername.Text = passItem.Username;
+                txtNickname.Text = passItem.Nickname;
+                txtEmail.Text = passItem.Email;
+                cBoxEmail.Checked = passItem.FEmailIsLogin;
+                txtPassword.Text = passItem.Password;
+                txtWebsite.Text = passItem.Website;
+                txtNotes.Text = passItem.Notes;
+            }
         }
 
         private void FrmMainEntry_Load(object sender, EventArgs e)
@@ -66,6 +83,14 @@ namespace PasswordMgr_WinForm
             if (viewModel.InsertNewItem(newItem))
             {
                 MessageBox.Show("Insert a new item successfully!");
+
+                ShouldGoWhichOne = DialogResultInfo.FrmList;
+
+                if (AfterFormClosed != null)
+                {
+                    AfterFormClosed(ShouldGoWhichOne, null);
+                    this.Close();
+                }
             }
         }
 
@@ -77,7 +102,10 @@ namespace PasswordMgr_WinForm
 
         private void btnShowList_Click(object sender, EventArgs e)
         {
-            gFormToShow = DialogResultInfo.FrmList;
+            ShouldGoWhichOne = DialogResultInfo.FrmList;
+            if (AfterFormClosed != null)
+                AfterFormClosed(ShouldGoWhichOne, null);
+
             this.Close();
         }
 

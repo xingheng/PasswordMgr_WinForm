@@ -18,12 +18,22 @@ namespace PasswordMgr_WinForm
             Application.SetCompatibleTextRenderingDefault(false);
 
             FrmMainEntry frm = new FrmMainEntry();
-            frm.ShowDialog();
-            if (frm.gFormToShow == DialogResultInfo.FrmList)
+            frm.AfterFormClosed += (sender, e) =>
             {
-                FrmList frmList = new FrmList();
-                frmList.ShowDialog();
-            }
+                if (sender != null && sender.GetType() == typeof(DialogResultInfo))
+                {
+                    switch ((DialogResultInfo)sender)
+                    {
+                        case DialogResultInfo.FrmList:
+                            FrmList frmList = new FrmList();
+                            frmList.ShowDialog();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
+            frm.ShowDialog();
 
             //Application.Run(new FrmMainEntry());
         }

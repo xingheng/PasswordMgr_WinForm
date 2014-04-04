@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PasswordMgr_WinForm
 {
-    class PasswordItem
+    public class PasswordItem
     {
         #region Members to be displayed
         private string systemname;

@@ -73,7 +73,7 @@ namespace PasswordMgr_WinForm
                         item.LastModifiedDate.ToShortDateString()
                     }
                 );
-                viewItem.Tag = item;    // Save the data source in Tag to get it easily.
+                viewItem.Tag = item;    // Save the data source in Tag for getting it easily later.
                 listView1.Items.Add(viewItem);
             }
         }
@@ -81,6 +81,13 @@ namespace PasswordMgr_WinForm
         private void btnInsert_Click(object sender, EventArgs e)
         {
             FrmMainEntry newFrm = new FrmMainEntry();
+            newFrm.AfterFormClosed += (s, eArgs) =>
+            {
+                if (s != null && s.GetType() == typeof(DialogResultInfo) && (DialogResultInfo)s == DialogResultInfo.FrmList)
+                {
+                    btnReloadAll_Click(null, null);
+                }
+            };
             newFrm.ShowDialog();
         }
 
@@ -89,7 +96,15 @@ namespace PasswordMgr_WinForm
             PasswordItem selectedItem;
             if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
             {
-                // TODO: How to update? Show the data source in FrmMainEntry?
+                FrmMainEntry frm = new FrmMainEntry(selectedItem);
+                frm.AfterFormClosed += (s, eArgs) =>
+                {
+                    if (sender != null && sender.GetType() == typeof(DialogResultInfo) && (DialogResultInfo)sender == DialogResultInfo.FrmList)
+                    {
+                        btnReloadAll_Click(null, null);
+                    }
+                };
+                frm.ShowDialog();
             }
         }
 

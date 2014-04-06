@@ -10,22 +10,20 @@ using System.Windows.Forms;
 
 namespace PasswordMgr_WinForm
 {
-    public enum DialogResultInfo
-    {
-        None, FrmMainEntry, FrmList
-    }
-
     public partial class FrmMainEntry : Form
     {
         PasswordMgrViewModel viewModel;
 
-        public DialogResultInfo ShouldGoWhichOne = DialogResultInfo.None;
-        public event EventHandler AfterFormClosed;
+        public delegate bool/* Should we close the window? */ RouteEventHandler();
+        public event RouteEventHandler AfterFormClosed;
+
+        bool IsInsertMode;  // Is this instance for insertion or update?
 
         public FrmMainEntry()
         {
             InitializeComponent();
             viewModel = new PasswordMgrViewModel();
+            IsInsertMode = true;
         }
 
         public FrmMainEntry(PasswordItem passItem)
@@ -33,6 +31,8 @@ namespace PasswordMgr_WinForm
         {
             if (passItem != null)
             {
+                IsInsertMode = false;
+
                 txtSystemname.Text = passItem.Systemname;
                 txtUsername.Text = passItem.Username;
                 txtNickname.Text = passItem.Nickname;
@@ -48,14 +48,23 @@ namespace PasswordMgr_WinForm
         {
             this.Text = GlobalConfig.AppName;
 
-            txtDBPath.Text = GlobalConfig.LoadConfig();
-            viewModel.InitDatabase(txtDBPath.Text.Trim());
+            if (IsInsertMode)
+            {
+                txtDBPath.Text = GlobalConfig.LoadConfig();
+                viewModel.InitDatabase(txtDBPath.Text.Trim());
 
-            openFileDialog1.Filter = "Database file|*.db|All files|*.*";
-            openFileDialog1.Multiselect = false;
+                openFileDialog1.Filter = "Database file|*.db|All files|*.*";
+                openFileDialog1.Multiselect = false;
 
-            cBoxEmail.Checked = true;   // Usually the email address could be the login name for websites.
-            this.txtUsername.Focus();
+                cBoxEmail.Checked = true;   // Usually the email address could be the login name for websites.
+                this.txtUsername.Focus();
+            }
+            else
+            {
+                btnSave.Text = "Update";
+                btnShowList.Enabled = false;
+                btnChangeDB.Enabled = false;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -80,18 +89,19 @@ namespace PasswordMgr_WinForm
             newItem.Website = txtWebsite.Text.Trim();
             newItem.Notes = txtNotes.Text.Trim();
 
-            if (viewModel.InsertNewItem(newItem))
+            if (IsInsertMode)
             {
-                MessageBox.Show("Insert a new item successfully!");
-
-                ShouldGoWhichOne = DialogResultInfo.FrmList;
-
-                if (AfterFormClosed != null)
-                {
-                    AfterFormClosed(ShouldGoWhichOne, null);
-                    this.Close();
-                }
+                if (viewModel.InsertNewItem(newItem))
+                    MessageBox.Show("Insert a new item successfully!");
             }
+            else
+            {
+                if (viewModel.UpdatePassItem(newItem))
+                    MessageBox.Show("Update a new item successfully!");
+            }
+
+            if (AfterFormClosed != null && AfterFormClosed())
+                this.Close();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -102,11 +112,11 @@ namespace PasswordMgr_WinForm
 
         private void btnShowList_Click(object sender, EventArgs e)
         {
-            ShouldGoWhichOne = DialogResultInfo.FrmList;
-            if (AfterFormClosed != null)
-                AfterFormClosed(ShouldGoWhichOne, null);
+            FrmList listWindow = new FrmList();
+            listWindow.Show();
 
-            this.Close();
+            if (AfterFormClosed != null && AfterFormClosed())
+                this.Close();
         }
 
         private void btnChangeDB_Click(object sender, EventArgs e)

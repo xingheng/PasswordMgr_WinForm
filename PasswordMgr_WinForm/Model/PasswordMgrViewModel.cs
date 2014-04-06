@@ -45,6 +45,8 @@ namespace PasswordMgr_WinForm
 
         public bool LoadDataFromDB(string filterString = "")
         {
+            ObservableCollection<PasswordItem> tempList = new ObservableCollection<PasswordItem>();
+
             DataTable dt = null;
             dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName + filterString);
             foreach (DataRow row in dt.Rows)
@@ -95,8 +97,11 @@ namespace PasswordMgr_WinForm
                     }
                 }
 
-                passItemList.Add(newPass);
+                tempList.Add(newPass);
             }
+
+            if (tempList != null && tempList.Count > 0)
+                passItemList = tempList;
 
             return true;
         }
@@ -136,28 +141,31 @@ namespace PasswordMgr_WinForm
         {
             bool status = false;
 
-            string cmdText = "UPDATE " + gTableName +
-                " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
-                ",password=@password,website=@website,notes=@notes,createdate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
-            Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
-                "@id", passItem.ID,
-                "@systemname", passItem.Systemname,
-                "@username", passItem.Username,
-                "@nickname", passItem.Nickname,
-                "@email", passItem.Email,
-                "@fEmailIsLogin", passItem.FEmailIsLogin,
-                "@password", passItem.Password,
-                "@website", passItem.Website,
-                "@notes", passItem.Notes,
-                "@createdDate", passItem.CreatedDate,
-                "@lastModifiedDate", passItem.LastModifiedDate);
-            if (ret != null)
+            if (!string.IsNullOrEmpty(passItem.ID))
             {
-                DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
-                status = false;
+                string cmdText = "UPDATE " + gTableName +
+                    " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
+                    ",password=@password,website=@website,notes=@notes,createdate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
+                Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
+                    "@id", passItem.ID,
+                    "@systemname", passItem.Systemname,
+                    "@username", passItem.Username,
+                    "@nickname", passItem.Nickname,
+                    "@email", passItem.Email,
+                    "@fEmailIsLogin", passItem.FEmailIsLogin,
+                    "@password", passItem.Password,
+                    "@website", passItem.Website,
+                    "@notes", passItem.Notes,
+                    "@createdate", passItem.CreatedDate,
+                    "@lastModifiedDate", passItem.LastModifiedDate);
+                if (ret != null)
+                {
+                    DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                    status = false;
+                }
+                else
+                    status = true;
             }
-            else
-                status = true;
 
             if (OnPasswordItemUpdated != null)
                 OnPasswordItemUpdated(null, null);
@@ -168,17 +176,20 @@ namespace PasswordMgr_WinForm
         {
             bool status = false;
 
-            string cmdText = "DELETE FROM " + gTableName +
-                " WHERE id=@id";
-            Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
-                "@id", passItem.ID);
-            if (ret != null)
+            if (!string.IsNullOrEmpty(passItem.ID))
             {
-                DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
-                status = false;
+                string cmdText = "DELETE FROM " + gTableName +
+                    " WHERE id=@id";
+                Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
+                    "@id", passItem.ID);
+                if (ret != null)
+                {
+                    DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                    status = false;
+                }
+                else
+                    status = true;
             }
-            else
-                status = true;
 
             if (OnPasswordItemDeleted != null)
                 OnPasswordItemDeleted(null, null);

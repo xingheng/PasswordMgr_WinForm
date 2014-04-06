@@ -92,11 +92,12 @@ namespace PasswordMgr_WinForm
         #region Construtors
         public PasswordItem()
         {
+            this.ID = Guid.NewGuid().ToString();
         }
 
         public PasswordItem(string aId)
         {
-            this.id = aId;
+            this.ID = aId;
         }
 
         public PasswordItem(string asystem, string auser, string anick, string aemail, bool fEmail, string apassword, string awebsite, string anotes)

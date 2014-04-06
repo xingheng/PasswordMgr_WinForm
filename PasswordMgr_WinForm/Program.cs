@@ -18,24 +18,15 @@ namespace PasswordMgr_WinForm
             Application.SetCompatibleTextRenderingDefault(false);
 
             FrmMainEntry frm = new FrmMainEntry();
-            frm.AfterFormClosed += (sender, e) =>
+            frm.AfterFormClosed += () =>
             {
-                if (sender != null && sender.GetType() == typeof(DialogResultInfo))
-                {
-                    switch ((DialogResultInfo)sender)
-                    {
-                        case DialogResultInfo.FrmList:
-                            FrmList frmList = new FrmList();
-                            frmList.ShowDialog();
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                // This window is only one running in the main thread, so never close it when AfterFormClosed.
+                frm.Hide();
+                return false;
             };
-            frm.ShowDialog();
+            //frm.ShowDialog();
 
-            //Application.Run(new FrmMainEntry());
+            Application.Run(frm);
         }
     }
 }

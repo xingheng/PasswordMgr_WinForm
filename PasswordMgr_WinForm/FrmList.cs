@@ -38,7 +38,7 @@ namespace PasswordMgr_WinForm
             listView1.Columns.Add("Created Date", 100);
             listView1.Columns.Add("Last Modified Date", 100);
 
-            listView1.MultiSelect = true;
+            listView1.MultiSelect = false;
             listView1.FullRowSelect = true;
 
             // search condition
@@ -57,6 +57,8 @@ namespace PasswordMgr_WinForm
 
         private void InitListViewData(ObservableCollection<PasswordItem> dataList)
         {
+            listView1.Items.Clear();
+
             foreach (var item in dataList)
             {
                 ListViewItem viewItem = new ListViewItem(
@@ -76,17 +78,16 @@ namespace PasswordMgr_WinForm
                 viewItem.Tag = item;    // Save the data source in Tag for getting it easily later.
                 listView1.Items.Add(viewItem);
             }
+            int count = listView1.Items.Count;
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
             FrmMainEntry newFrm = new FrmMainEntry();
-            newFrm.AfterFormClosed += (s, eArgs) =>
+            newFrm.AfterFormClosed += () =>
             {
-                if (s != null && s.GetType() == typeof(DialogResultInfo) && (DialogResultInfo)s == DialogResultInfo.FrmList)
-                {
-                    btnReloadAll_Click(null, null);
-                }
+                btnReloadAll_Click(null, null);
+                return true;
             };
             newFrm.ShowDialog();
         }
@@ -97,12 +98,10 @@ namespace PasswordMgr_WinForm
             if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
             {
                 FrmMainEntry frm = new FrmMainEntry(selectedItem);
-                frm.AfterFormClosed += (s, eArgs) =>
+                frm.AfterFormClosed += () =>
                 {
-                    if (sender != null && sender.GetType() == typeof(DialogResultInfo) && (DialogResultInfo)sender == DialogResultInfo.FrmList)
-                    {
-                        btnReloadAll_Click(null, null);
-                    }
+                    btnReloadAll_Click(null, null);
+                    return true;
                 };
                 frm.ShowDialog();
             }
@@ -113,12 +112,13 @@ namespace PasswordMgr_WinForm
             PasswordItem selectedItem;
             if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
             {
-                if (DialogResult.OK == MessageBox.Show(selectedItem.ToString(), "Delete"))
+                if (DialogResult.OK == MessageBox.Show(selectedItem.ToString(), "Delete?"))
                 {
-                    if (viewModel.DeletePassItem(selectedItem))
+                    if (!viewModel.DeletePassItem(selectedItem))
                     {
-                        MessageBox.Show(selectedItem.ToString(), "Deleted");
+                        DialogHelper.ShowErrorMessage("Delete failed!\r\n\r\n" + selectedItem.ToString(), "Delete?");
                     }
+                    btnReloadAll_Click(null, null);
                 }
             }
         }
@@ -176,6 +176,11 @@ namespace PasswordMgr_WinForm
                 DialogHelper.ShowMessage("Failed to load data from database.");
 
             tabPage1.Focus();
+        }
+
+        private void FrmList_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

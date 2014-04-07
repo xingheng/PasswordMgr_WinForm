@@ -48,6 +48,8 @@ namespace PasswordMgr_WinForm
         {
             this.Text = GlobalConfig.AppName;
 
+            toolTip1.SetToolTip(txtPassword, txtPassword.Text);
+
             if (IsInsertMode)
             {
                 txtDBPath.Text = GlobalConfig.LoadConfig();

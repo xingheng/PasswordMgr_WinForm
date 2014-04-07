@@ -68,7 +68,7 @@ namespace PasswordMgr_WinForm
                         item.Nickname,
                         item.Email,
                         item.FEmailIsLogin.ToString(),
-                        item.Password,
+                        "******", //item.Password,
                         item.Website,
                         item.Notes,
                         item.CreatedDate.ToShortDateString(),
@@ -150,7 +150,7 @@ namespace PasswordMgr_WinForm
             else
                 DialogHelper.ShowMessage("Failed to load data from database.");
 
-            tabPage1.Focus();
+            tabControl1.SelectedIndex = 0;
         }
 
         private void btnGoSearch_Click(object sender, EventArgs e)
@@ -159,12 +159,13 @@ namespace PasswordMgr_WinForm
             switch (cBoxSearchType.SelectedIndex)
             {
                 case 0:
+                    // TODO
                     break;
                 case 1:
-                    strFilter += "username =" + txtKeywords.Text.Trim();
+                    strFilter += "username =" + txtKeywords.Text.Trim();    // TODO
                     break;
                 case 2:
-                    strFilter += "email =" + txtKeywords.Text.Trim();
+                    strFilter += "email =" + txtKeywords.Text.Trim();   // TODO
                     break;
             }
 

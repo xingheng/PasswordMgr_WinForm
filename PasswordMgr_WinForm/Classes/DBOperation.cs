@@ -53,7 +53,13 @@ namespace SQLite_CSharp
 
                         command.CommandTimeout = 10;
                         connection.Open(); 
-                        command.ExecuteNonQuery();
+                        int iCount = command.ExecuteNonQuery();
+#if DEBUG
+                        if (iCount <= 0)
+                        {
+                            result = new Exception("SQLiteRequest_Write: ExecuteNonQuery returns " + iCount.ToString());
+                        }
+#endif
                     }
                 }
             }

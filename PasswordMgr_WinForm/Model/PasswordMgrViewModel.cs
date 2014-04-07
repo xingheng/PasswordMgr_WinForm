@@ -145,7 +145,7 @@ namespace PasswordMgr_WinForm
             {
                 string cmdText = "UPDATE " + gTableName +
                     " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
-                    ",password=@password,website=@website,notes=@notes,createdate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
+                    ",password=@password,website=@website,notes=@notes,createddate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
                 Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
                     "@id", passItem.ID,
                     "@systemname", passItem.Systemname,
@@ -156,7 +156,7 @@ namespace PasswordMgr_WinForm
                     "@password", passItem.Password,
                     "@website", passItem.Website,
                     "@notes", passItem.Notes,
-                    "@createdate", passItem.CreatedDate,
+                    "@createdDate", passItem.CreatedDate,
                     "@lastModifiedDate", passItem.LastModifiedDate);
                 if (ret != null)
                 {

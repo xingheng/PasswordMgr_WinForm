@@ -15,7 +15,7 @@ namespace PasswordMgr_WinForm
         PasswordMgrViewModel viewModel;
 
         public delegate bool/* Should we close the window? */ RouteEventHandler();
-        public event RouteEventHandler AfterFormClosed;
+        public event RouteEventHandler OnFormEntityClosing;
 
         bool IsInsertMode;  // Is this instance for insertion or update?
 
@@ -64,6 +64,7 @@ namespace PasswordMgr_WinForm
             else
             {
                 btnSave.Text = "Update";
+                btnNew.Enabled = false;
                 btnShowList.Enabled = false;
                 btnChangeDB.Enabled = false;
             }
@@ -102,7 +103,7 @@ namespace PasswordMgr_WinForm
                     MessageBox.Show("Update a new item successfully!");
             }
 
-            if (AfterFormClosed != null && AfterFormClosed())
+            if (OnFormEntityClosing != null && OnFormEntityClosing())
                 this.Close();
         }
 
@@ -117,8 +118,10 @@ namespace PasswordMgr_WinForm
             FrmList listWindow = new FrmList();
             listWindow.Show();
 
-            if (AfterFormClosed != null && AfterFormClosed())
+            if (OnFormEntityClosing != null && OnFormEntityClosing())
                 this.Close();
+            else
+                this.Hide();
         }
 
         private void btnChangeDB_Click(object sender, EventArgs e)

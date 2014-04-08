@@ -18,10 +18,9 @@ namespace PasswordMgr_WinForm
             Application.SetCompatibleTextRenderingDefault(false);
 
             FrmMainEntry frm = new FrmMainEntry();
-            frm.AfterFormClosed += () =>
+            frm.OnFormEntityClosing += () =>
             {
                 // This window is only one running in the main thread, so never close it when AfterFormClosed.
-                frm.Hide();
                 return false;
             };
             //frm.ShowDialog();

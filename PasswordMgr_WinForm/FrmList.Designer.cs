@@ -58,9 +58,10 @@
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(769, 395);
+            this.listView1.Size = new System.Drawing.Size(769, 428);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // tabControl1
             // 
@@ -69,10 +70,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 11);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(777, 464);
+            this.tabControl1.Size = new System.Drawing.Size(777, 503);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -84,7 +85,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(769, 438);
+            this.tabPage1.Size = new System.Drawing.Size(769, 477);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Data List";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -92,9 +93,9 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnDelete.Location = new System.Drawing.Point(439, 404);
+            this.btnDelete.Location = new System.Drawing.Point(439, 438);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 29);
+            this.btnDelete.Size = new System.Drawing.Size(75, 31);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -103,9 +104,9 @@
             // btnInsert
             // 
             this.btnInsert.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnInsert.Location = new System.Drawing.Point(219, 403);
+            this.btnInsert.Location = new System.Drawing.Point(219, 437);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(75, 29);
+            this.btnInsert.Size = new System.Drawing.Size(75, 31);
             this.btnInsert.TabIndex = 1;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = true;
@@ -114,9 +115,9 @@
             // btnUpdate
             // 
             this.btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnUpdate.Location = new System.Drawing.Point(329, 403);
+            this.btnUpdate.Location = new System.Drawing.Point(329, 437);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 29);
+            this.btnUpdate.Size = new System.Drawing.Size(75, 31);
             this.btnUpdate.TabIndex = 0;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -129,16 +130,16 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(769, 438);
+            this.tabPage2.Size = new System.Drawing.Size(769, 477);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Option";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnReloadAll
             // 
-            this.btnReloadAll.Location = new System.Drawing.Point(18, 132);
+            this.btnReloadAll.Location = new System.Drawing.Point(18, 143);
             this.btnReloadAll.Name = "btnReloadAll";
-            this.btnReloadAll.Size = new System.Drawing.Size(104, 24);
+            this.btnReloadAll.Size = new System.Drawing.Size(104, 26);
             this.btnReloadAll.TabIndex = 1;
             this.btnReloadAll.Text = "Reload All";
             this.btnReloadAll.UseVisualStyleBackColor = true;
@@ -151,9 +152,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnGoSearch);
-            this.groupBox1.Location = new System.Drawing.Point(18, 16);
+            this.groupBox1.Location = new System.Drawing.Point(18, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(296, 101);
+            this.groupBox1.Size = new System.Drawing.Size(296, 109);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -161,41 +162,41 @@
             // cBoxSearchType
             // 
             this.cBoxSearchType.FormattingEnabled = true;
-            this.cBoxSearchType.Location = new System.Drawing.Point(76, 56);
+            this.cBoxSearchType.Location = new System.Drawing.Point(76, 61);
             this.cBoxSearchType.Name = "cBoxSearchType";
-            this.cBoxSearchType.Size = new System.Drawing.Size(109, 20);
+            this.cBoxSearchType.Size = new System.Drawing.Size(109, 21);
             this.cBoxSearchType.TabIndex = 4;
             // 
             // txtKeywords
             // 
-            this.txtKeywords.Location = new System.Drawing.Point(76, 26);
+            this.txtKeywords.Location = new System.Drawing.Point(76, 28);
             this.txtKeywords.Name = "txtKeywords";
-            this.txtKeywords.Size = new System.Drawing.Size(189, 21);
+            this.txtKeywords.Size = new System.Drawing.Size(189, 20);
             this.txtKeywords.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 59);
+            this.label2.Location = new System.Drawing.Point(24, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
+            this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "By Type";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 29);
+            this.label1.Location = new System.Drawing.Point(17, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords";
             // 
             // btnGoSearch
             // 
-            this.btnGoSearch.Location = new System.Drawing.Point(203, 54);
+            this.btnGoSearch.Location = new System.Drawing.Point(203, 59);
             this.btnGoSearch.Name = "btnGoSearch";
-            this.btnGoSearch.Size = new System.Drawing.Size(62, 21);
+            this.btnGoSearch.Size = new System.Drawing.Size(62, 23);
             this.btnGoSearch.TabIndex = 0;
             this.btnGoSearch.Text = "Go";
             this.btnGoSearch.UseVisualStyleBackColor = true;
@@ -203,9 +204,9 @@
             // 
             // FrmList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 486);
+            this.ClientSize = new System.Drawing.Size(801, 527);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

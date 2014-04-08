@@ -28,12 +28,12 @@ namespace PasswordMgr_WinForm
             // init list view.
             listView1.View = View.Details;
             listView1.Columns.Add("System Name", 100);
-            listView1.Columns.Add("User Name", 100);
-            listView1.Columns.Add("Nick Name", 100);
+            listView1.Columns.Add("User Name", 80);
+            listView1.Columns.Add("Nick Name", 80);
             listView1.Columns.Add("Email", 100);
-            listView1.Columns.Add("Could eamail login?", 100);
-            listView1.Columns.Add("Password", 100);
-            listView1.Columns.Add("Website", 100);
+            listView1.Columns.Add("Could eamail login?", 130);
+            listView1.Columns.Add("Password", 80);
+            listView1.Columns.Add("Website", 130);
             listView1.Columns.Add("Notes", 100);
             listView1.Columns.Add("Created Date", 100);
             listView1.Columns.Add("Last Modified Date", 100);
@@ -47,7 +47,12 @@ namespace PasswordMgr_WinForm
             cBoxSearchType.Items.Add("Email");
 
 
-            if (viewModel.LoadDataFromDB())
+            ReloadData();
+        }
+
+        private void ReloadData(string filter = "")
+        {
+            if (viewModel.LoadDataFromDB(filter))
             {
                 InitListViewData(viewModel.PassItemList);
             }
@@ -84,9 +89,9 @@ namespace PasswordMgr_WinForm
         private void btnInsert_Click(object sender, EventArgs e)
         {
             FrmMainEntry newFrm = new FrmMainEntry();
-            newFrm.AfterFormClosed += () =>
+            newFrm.OnFormEntityClosing += () =>
             {
-                btnReloadAll_Click(null, null);
+                ReloadData();
                 return true;
             };
             newFrm.ShowDialog();
@@ -98,9 +103,9 @@ namespace PasswordMgr_WinForm
             if (GetSeletedPassItem(out selectedItem) && selectedItem != null)
             {
                 FrmMainEntry frm = new FrmMainEntry(selectedItem);
-                frm.AfterFormClosed += () =>
+                frm.OnFormEntityClosing += () =>
                 {
-                    btnReloadAll_Click(null, null);
+                    ReloadData();
                     return true;
                 };
                 frm.ShowDialog();
@@ -118,7 +123,7 @@ namespace PasswordMgr_WinForm
                     {
                         DialogHelper.ShowErrorMessage("Delete failed!\r\n\r\n" + selectedItem.ToString(), "Delete?");
                     }
-                    btnReloadAll_Click(null, null);
+                    ReloadData();
                 }
             }
         }
@@ -143,13 +148,7 @@ namespace PasswordMgr_WinForm
 
         private void btnReloadAll_Click(object sender, EventArgs e)
         {
-            if (viewModel.LoadDataFromDB())
-            {
-                InitListViewData(viewModel.PassItemList);
-            }
-            else
-                DialogHelper.ShowMessage("Failed to load data from database.");
-
+            ReloadData();
             tabControl1.SelectedIndex = 0;
         }
 
@@ -169,19 +168,18 @@ namespace PasswordMgr_WinForm
                     break;
             }
 
-            if (viewModel.LoadDataFromDB(strFilter))
-            {
-                InitListViewData(viewModel.PassItemList);
-            }
-            else
-                DialogHelper.ShowMessage("Failed to load data from database.");
-
-            tabPage1.Focus();
+            ReloadData(strFilter);
+            tabControl1.SelectedIndex = 0;
         }
 
         private void FrmList_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            btnUpdate_Click(sender, e);
         }
     }
 }

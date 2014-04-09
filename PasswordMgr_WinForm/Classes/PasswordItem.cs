@@ -93,6 +93,7 @@ namespace PasswordMgr_WinForm
         public PasswordItem()
         {
             this.ID = Guid.NewGuid().ToString();
+            this.createdDate = this.lastModifiedDate = DateTime.Now;
         }
 
         public PasswordItem(string aId)
@@ -101,10 +102,8 @@ namespace PasswordMgr_WinForm
         }
 
         public PasswordItem(string asystem, string auser, string anick, string aemail, bool fEmail, string apassword, string awebsite, string anotes)
+            : this()
         {
-            this.ID = Guid.NewGuid().ToString();
-            this.createdDate = this.lastModifiedDate = DateTime.Now;
-
             this.Systemname = asystem;
             this.Username = auser;
             this.Nickname = anick;

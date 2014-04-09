@@ -15,7 +15,7 @@ namespace PasswordMgr_WinForm
 
         const string gConfigFileLocation = "PasswordMgr.ini";
 
-        public static readonly string DefaultDBPath = ".\\Data\\pdb";
+        public static readonly string DefaultDBPath = ".\\Data\\pdb.db";
 
         public static string LoadConfig()
         {

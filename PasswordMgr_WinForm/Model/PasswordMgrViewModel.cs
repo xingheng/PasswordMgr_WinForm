@@ -126,7 +126,7 @@ namespace PasswordMgr_WinForm
                 "@lastModifiedDate", passItem.LastModifiedDate);
             if (ret != null)
             {
-                DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                DialogHelper.ShowMessage("cmdText: " + cmdText + "\r\n\r\n" + ret.ToString(), "Insert");
                 status = false;
             }
             else
@@ -143,6 +143,7 @@ namespace PasswordMgr_WinForm
 
             if (!string.IsNullOrEmpty(passItem.ID))
             {
+#if PARAMETERS
                 string cmdText = "UPDATE " + gTableName +
                     " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
                     ",password=@password,website=@website,notes=@notes,createddate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
@@ -152,15 +153,23 @@ namespace PasswordMgr_WinForm
                     "@username", passItem.Username,
                     "@nickname", passItem.Nickname,
                     "@email", passItem.Email,
-                    "@fEmailIsLogin", passItem.FEmailIsLogin,
+                    "@fEmailIsLogin", passItem.FEmailIsLogin ? 1 : 0,
                     "@password", passItem.Password,
                     "@website", passItem.Website,
                     "@notes", passItem.Notes,
                     "@createdDate", passItem.CreatedDate,
                     "@lastModifiedDate", passItem.LastModifiedDate);
+#else
+                string cmdText = "UPDATE " + gTableName +
+                    " SET systemname='" + passItem.Systemname + "',username='" + passItem.Username + "',nickname='" + passItem.Nickname
+                    + "',email='" + passItem.Email + "',femailislogin=" + (passItem.FEmailIsLogin ? 1 : 0).ToString()
+                    + ",password='" + passItem.Password + "',website='" + passItem.Website + "',notes='" + passItem.Notes
+                    + "',createddate='" + passItem.CreatedDate + "',lastmodifieddate='" + passItem.LastModifiedDate + "' WHERE id='" + passItem.ID + "'";
+                Exception ret = DBOperation.SQLiteRequest_Write(cmdText);
+#endif
                 if (ret != null)
                 {
-                    DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                    DialogHelper.ShowMessage("cmdText: " + cmdText + "\r\n\r\n" + ret.ToString(), "Update");
                     status = false;
                 }
                 else
@@ -184,7 +193,7 @@ namespace PasswordMgr_WinForm
                     "@id", passItem.ID);
                 if (ret != null)
                 {
-                    DialogHelper.ShowExcetion(ret, "cmdText: " + cmdText);
+                    DialogHelper.ShowMessage("cmdText: " + cmdText + "\r\n\r\n" + ret.ToString(), "Delete");
                     status = false;
                 }
                 else

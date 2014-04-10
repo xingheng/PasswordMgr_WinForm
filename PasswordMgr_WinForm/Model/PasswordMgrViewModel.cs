@@ -58,6 +58,7 @@ namespace PasswordMgr_WinForm
                 {
                     switch (index)
                     {
+                        #region Get members from DataRow
                         case 0:
                             newPass = new PasswordItem(row.ItemArray[index].ToString());
                             break;
@@ -94,6 +95,7 @@ namespace PasswordMgr_WinForm
                         default:
                             System.Diagnostics.Debug.Assert(false, "Additional Column?");
                             break;
+                        #endregion
                     }
                 }
 
@@ -104,6 +106,32 @@ namespace PasswordMgr_WinForm
                 passItemList = tempList;
 
             return true;
+        }
+
+        public string GenerateFilterByColumn(string matchValue, string strColumn = "")
+        {
+            StringBuilder filterResult = new StringBuilder(" WHERE ");
+
+            if (string.IsNullOrEmpty(strColumn))
+            {
+                string[] columns = { "systemname", "username", "nickname", "email", "password", "website", "notes" };
+                string connector = " OR ";
+
+                foreach (var col in columns)
+                {
+                    filterResult.Append(col + " LIKE '%" + matchValue + "%'");
+                    filterResult.Append(connector);
+                }
+                
+                // Remove the last OR connector
+                int index = filterResult.ToString().LastIndexOf(connector);
+                filterResult.Remove(index, connector.Length);
+            }
+            else
+            {
+                filterResult.Append(strColumn + " LIKE '%" + matchValue + "%'");
+            }
+            return filterResult.ToString();
         }
 
         public bool InsertNewItem(PasswordItem passItem)

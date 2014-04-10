@@ -154,20 +154,20 @@ namespace PasswordMgr_WinForm
 
         private void btnGoSearch_Click(object sender, EventArgs e)
         {
-            string strFilter = " where ";
+            string strColumn = "";
             switch (cBoxSearchType.SelectedIndex)
             {
                 case 0:
-                    // TODO
                     break;
                 case 1:
-                    strFilter += "username =" + txtKeywords.Text.Trim();    // TODO
+                    strColumn = "username";
                     break;
                 case 2:
-                    strFilter += "email =" + txtKeywords.Text.Trim();   // TODO
+                    strColumn = "email";
                     break;
             }
 
+            string strFilter = viewModel.GenerateFilterByColumn(txtKeywords.Text.Trim(), strColumn);
             ReloadData(strFilter);
             tabControl1.SelectedIndex = 0;
         }

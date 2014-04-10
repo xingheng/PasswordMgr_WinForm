@@ -76,8 +76,8 @@ namespace PasswordMgr_WinForm
                         "******", //item.Password,
                         item.Website,
                         item.Notes,
-                        item.CreatedDate.ToShortDateString(),
-                        item.LastModifiedDate.ToShortDateString()
+                        item.CreatedDate.ToString("MM/dd/yyyy hh:mm"),
+                        item.LastModifiedDate.ToString("MM/dd/yyyy hh:mm")
                     }
                 );
                 viewItem.Tag = item;    // Save the data source in Tag for getting it easily later.

@@ -74,7 +74,7 @@ namespace PasswordMgr_WinForm
                             newPass.Email = row.ItemArray[index].ToString();
                             break;
                         case 5:
-                            newPass.FEmailIsLogin = row.ItemArray[index].ToString() == "1" ? true : false;
+                            newPass.FEmailIsLogin = row.ItemArray[index].ToString() != "0" ? true : false;
                             break;
                         case 6:
                             newPass.Password = row.ItemArray[index].ToString();
@@ -143,10 +143,9 @@ namespace PasswordMgr_WinForm
 
             if (!string.IsNullOrEmpty(passItem.ID))
             {
-#if PARAMETERS
                 string cmdText = "UPDATE " + gTableName +
                     " SET systemname=@systemname,username=@username,nickname=@nickname,email=@email,femailislogin=@fEmailIsLogin" +
-                    ",password=@password,website=@website,notes=@notes,createddate=@createdDate,lastmodifieddate=@lastModifiedDate WHERE id=@id";
+                    ",password=@password,website=@website,notes=@notes,lastmodifieddate=@lastModifiedDate WHERE id=@id";    //,createddate=@createdDate
                 Exception ret = DBOperation.SQLiteRequest_Write(cmdText,
                     "@id", passItem.ID,
                     "@systemname", passItem.Systemname,
@@ -157,16 +156,16 @@ namespace PasswordMgr_WinForm
                     "@password", passItem.Password,
                     "@website", passItem.Website,
                     "@notes", passItem.Notes,
-                    "@createdDate", passItem.CreatedDate,
+                    //"@createdDate", passItem.CreatedDate,
                     "@lastModifiedDate", passItem.LastModifiedDate);
-#else
-                string cmdText = "UPDATE " + gTableName +
-                    " SET systemname='" + passItem.Systemname + "',username='" + passItem.Username + "',nickname='" + passItem.Nickname
-                    + "',email='" + passItem.Email + "',femailislogin=" + (passItem.FEmailIsLogin ? 1 : 0).ToString()
-                    + ",password='" + passItem.Password + "',website='" + passItem.Website + "',notes='" + passItem.Notes
-                    + "',createddate='" + passItem.CreatedDate + "',lastmodifieddate='" + passItem.LastModifiedDate + "' WHERE id='" + passItem.ID + "'";
-                Exception ret = DBOperation.SQLiteRequest_Write(cmdText);
-#endif
+
+                //string cmdText = "UPDATE " + gTableName +
+                //    " SET systemname='" + passItem.Systemname + "',username='" + passItem.Username + "',nickname='" + passItem.Nickname
+                //    + "',email='" + passItem.Email + "',femailislogin=" + (passItem.FEmailIsLogin ? 1 : 0).ToString()
+                //    + ",password='" + passItem.Password + "',website='" + passItem.Website + "',notes='" + passItem.Notes
+                //    +/* "',createddate='" + passItem.CreatedDate +*/ "',lastmodifieddate='" + passItem.LastModifiedDate + "' WHERE id='" + passItem.ID + "'";
+                //Exception ret = DBOperation.SQLiteRequest_Write(cmdText);
+
                 if (ret != null)
                 {
                     DialogHelper.ShowMessage("cmdText: " + cmdText + "\r\n\r\n" + ret.ToString(), "Update");

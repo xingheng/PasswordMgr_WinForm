@@ -18,6 +18,7 @@ namespace PasswordMgr_WinForm
         public event RouteEventHandler OnFormEntityClosing;
 
         bool IsInsertMode;  // Is this instance for insertion or update?
+        string gUpdatedPassItemID;  // To save the PassItem's ID to be updated, null when it's insertion mode.
 
         public FrmMainEntry()
         {
@@ -33,6 +34,7 @@ namespace PasswordMgr_WinForm
             {
                 IsInsertMode = false;
 
+                gUpdatedPassItemID = passItem.ID;
                 txtSystemname.Text = passItem.Systemname;
                 txtUsername.Text = passItem.Username;
                 txtNickname.Text = passItem.Nickname;
@@ -42,13 +44,18 @@ namespace PasswordMgr_WinForm
                 txtWebsite.Text = passItem.Website;
                 txtNotes.Text = passItem.Notes;
             }
+            else
+                DialogHelper.ShowMessage("FrmMainEntry: Wrong Parameters");
         }
 
         private void FrmMainEntry_Load(object sender, EventArgs e)
         {
             this.Text = GlobalConfig.AppName;
 
+            toolTip1.InitialDelay = 10;
             toolTip1.SetToolTip(txtPassword, txtPassword.Text);
+            txtPassword.TextChanged += (s, eArgs) =>
+            { toolTip1.SetToolTip(txtPassword, txtPassword.Text); };
 
             if (IsInsertMode)
             {
@@ -82,7 +89,17 @@ namespace PasswordMgr_WinForm
                 return;
             }
 
-            PasswordItem newItem = new PasswordItem();
+            PasswordItem newItem = null;
+            if (IsInsertMode)
+            {
+                newItem = new PasswordItem();
+            }
+            else
+            {
+                newItem = new PasswordItem(gUpdatedPassItemID);
+                newItem.LastModifiedDate = DateTime.Now;
+            }
+
             newItem.Systemname = txtSystemname.Text.Trim();
             newItem.Username = txtUsername.Text.Trim();
             newItem.Nickname = txtNickname.Text.Trim();

@@ -1,0 +1,15 @@
+CREATE TABLE passwordtb ( 
+    id               NVARCHAR( 40 ),
+    systemname       NVARCHAR( 100 ),
+    username         NVARCHAR( 100 ),
+    nickname         NVARCHAR( 100 ),
+    email            NVARCHAR( 100 ),
+    femailislogin    INT,
+    password         TEXT,
+    website          NVARCHAR( 200 ),
+    notes            TEXT,
+    createddate      TEXT,
+    lastmodifieddate TEXT,
+    PRIMARY KEY ( id )  ON CONFLICT FAIL,
+    CONSTRAINT 'ID_NOT_NULL' CHECK ( id != NULL ) 
+);

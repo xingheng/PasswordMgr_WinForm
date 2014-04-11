@@ -48,7 +48,15 @@ namespace PasswordMgr_WinForm
             ObservableCollection<PasswordItem> tempList = new ObservableCollection<PasswordItem>();
 
             DataTable dt = null;
-            dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName + filterString);
+            try
+            {
+                dt = (DataTable)DBOperation.SQLiteRequest_Read("SELECT * FROM " + gTableName + filterString);
+            }
+            catch(Exception ex)
+            {
+                DialogHelper.ShowExcetion(ex, "LoadDataFromDB");
+                return false;
+            }
             foreach (DataRow row in dt.Rows)
             {
                 PasswordItem newPass = null;

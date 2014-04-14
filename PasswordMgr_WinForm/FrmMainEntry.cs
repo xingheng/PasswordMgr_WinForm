@@ -59,8 +59,9 @@ namespace PasswordMgr_WinForm
 
             if (IsInsertMode)
             {
-                txtDBPath.Text = GlobalConfig.LoadConfig();
-                viewModel.InitDatabase(txtDBPath.Text.Trim());
+                string dbFile = GlobalConfig.LoadConfig();
+                txtDBPath.Text = dbFile;
+                viewModel.InitDatabase(dbFile);
 
                 openFileDialog1.Filter = "Database file|*.db|All files|*.*";
                 openFileDialog1.Multiselect = false;
@@ -146,7 +147,11 @@ namespace PasswordMgr_WinForm
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                txtDBPath.Text = openFileDialog1.FileName;
+                string filepath = openFileDialog1.FileName;
+                txtDBPath.Text = filepath;
+                GlobalConfig.SaveConfig(filepath);
+
+                viewModel.InitDatabase(filepath);
             }
         }
     }

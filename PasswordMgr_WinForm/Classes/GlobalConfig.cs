@@ -21,19 +21,28 @@ namespace PasswordMgr_WinForm
         {
             string result = "";
 
+            // When user run this app at the first time, the config file .ini doesn't exist.
             FileInfo configFile = new FileInfo(gConfigFileLocation);
             if (configFile.Exists)
             {
                 XDocument xdoc = XDocument.Load(gConfigFileLocation);
-                XElement dbPathElement = xdoc.Element("DBPath");
+                XElement dbPathElement = xdoc.Root.Element("DBPath");
                 if (dbPathElement != null)
                     result = dbPathElement.Value;
+#if DEBUG
+                else
+                    DialogHelper.ShowMessage(string.Format("Didn't found the DBPath element in file '{0}'.", configFile.FullName), "LoadConfig");
+#endif
             }
             else
             {
                 FileInfo dbInfo = new FileInfo(DefaultDBPath);
                 if (dbInfo.Exists)
-                    result = dbInfo.FullName;
+                {
+                    string fullpath = dbInfo.FullName;
+                    SaveConfig(fullpath);
+                    result = fullpath;
+                }
             }
 
             return result;

@@ -59,54 +59,54 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 57);
+            this.label1.Location = new System.Drawing.Point(28, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "User name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 165);
+            this.label2.Location = new System.Drawing.Point(32, 179);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Password";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 85);
+            this.label3.Location = new System.Drawing.Point(28, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Nick name";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 193);
+            this.label4.Location = new System.Drawing.Point(37, 209);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "WebSite";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(54, 113);
+            this.label5.Location = new System.Drawing.Point(54, 122);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Email";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 221);
+            this.label6.Location = new System.Drawing.Point(50, 239);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Notes";
             // 
@@ -129,26 +129,26 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(12, 11);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(345, 285);
+            this.groupBox1.Size = new System.Drawing.Size(345, 309);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Password";
             // 
             // txtSystemname
             // 
-            this.txtSystemname.Location = new System.Drawing.Point(101, 25);
+            this.txtSystemname.Location = new System.Drawing.Point(101, 27);
             this.txtSystemname.Name = "txtSystemname";
-            this.txtSystemname.Size = new System.Drawing.Size(191, 21);
+            this.txtSystemname.Size = new System.Drawing.Size(191, 20);
             this.txtSystemname.TabIndex = 7;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 28);
+            this.label7.Location = new System.Drawing.Point(15, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 12);
+            this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "System name";
             // 
@@ -157,63 +157,63 @@
             this.cBoxEmail.AutoSize = true;
             this.cBoxEmail.Checked = true;
             this.cBoxEmail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cBoxEmail.Location = new System.Drawing.Point(101, 134);
+            this.cBoxEmail.Location = new System.Drawing.Point(101, 145);
             this.cBoxEmail.Name = "cBoxEmail";
-            this.cBoxEmail.Size = new System.Drawing.Size(240, 16);
+            this.cBoxEmail.Size = new System.Drawing.Size(195, 17);
             this.cBoxEmail.TabIndex = 3;
             this.cBoxEmail.Text = "Email string could be the login name";
             this.cBoxEmail.UseVisualStyleBackColor = true;
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(101, 218);
+            this.txtNotes.Location = new System.Drawing.Point(101, 236);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(191, 47);
+            this.txtNotes.Size = new System.Drawing.Size(191, 51);
             this.txtNotes.TabIndex = 6;
             // 
             // txtWebsite
             // 
-            this.txtWebsite.Location = new System.Drawing.Point(101, 190);
+            this.txtWebsite.Location = new System.Drawing.Point(101, 206);
             this.txtWebsite.Name = "txtWebsite";
-            this.txtWebsite.Size = new System.Drawing.Size(191, 21);
+            this.txtWebsite.Size = new System.Drawing.Size(191, 20);
             this.txtWebsite.TabIndex = 5;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(101, 162);
+            this.txtPassword.Location = new System.Drawing.Point(101, 176);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(191, 21);
+            this.txtPassword.Size = new System.Drawing.Size(191, 20);
             this.txtPassword.TabIndex = 4;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(101, 110);
+            this.txtEmail.Location = new System.Drawing.Point(101, 119);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(191, 21);
+            this.txtEmail.Size = new System.Drawing.Size(191, 20);
             this.txtEmail.TabIndex = 2;
             // 
             // txtNickname
             // 
-            this.txtNickname.Location = new System.Drawing.Point(101, 82);
+            this.txtNickname.Location = new System.Drawing.Point(101, 89);
             this.txtNickname.Name = "txtNickname";
-            this.txtNickname.Size = new System.Drawing.Size(191, 21);
+            this.txtNickname.Size = new System.Drawing.Size(191, 20);
             this.txtNickname.TabIndex = 1;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(101, 54);
+            this.txtUsername.Location = new System.Drawing.Point(101, 59);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(191, 21);
+            this.txtUsername.Size = new System.Drawing.Size(191, 20);
             this.txtUsername.TabIndex = 0;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(377, 51);
+            this.btnSave.Location = new System.Drawing.Point(377, 55);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 21);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -222,9 +222,9 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(377, 97);
+            this.btnNew.Location = new System.Drawing.Point(377, 105);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 21);
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 8;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -233,9 +233,9 @@
             // btnShowList
             // 
             this.btnShowList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowList.Location = new System.Drawing.Point(377, 224);
+            this.btnShowList.Location = new System.Drawing.Point(377, 243);
             this.btnShowList.Name = "btnShowList";
-            this.btnShowList.Size = new System.Drawing.Size(75, 21);
+            this.btnShowList.Size = new System.Drawing.Size(75, 23);
             this.btnShowList.TabIndex = 9;
             this.btnShowList.Text = "Show List....";
             this.btnShowList.UseVisualStyleBackColor = true;
@@ -246,44 +246,40 @@
             this.txtDBPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDBPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDBPath.Location = new System.Drawing.Point(97, 307);
+            this.txtDBPath.Location = new System.Drawing.Point(97, 333);
             this.txtDBPath.Name = "txtDBPath";
             this.txtDBPath.ReadOnly = true;
-            this.txtDBPath.Size = new System.Drawing.Size(355, 14);
+            this.txtDBPath.Size = new System.Drawing.Size(355, 13);
             this.txtDBPath.TabIndex = 11;
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 307);
+            this.label8.Location = new System.Drawing.Point(12, 333);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 12);
+            this.label8.Size = new System.Drawing.Size(81, 13);
             this.label8.TabIndex = 10;
             this.label8.Text = "Database Path:";
             // 
             // btnChangeDB
             // 
             this.btnChangeDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangeDB.Location = new System.Drawing.Point(377, 266);
+            this.btnChangeDB.Location = new System.Drawing.Point(377, 288);
             this.btnChangeDB.Name = "btnChangeDB";
-            this.btnChangeDB.Size = new System.Drawing.Size(75, 21);
+            this.btnChangeDB.Size = new System.Drawing.Size(75, 23);
             this.btnChangeDB.TabIndex = 12;
             this.btnChangeDB.Text = "Change DB";
             this.btnChangeDB.UseVisualStyleBackColor = true;
             this.btnChangeDB.Click += new System.EventHandler(this.btnChangeDB_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // FrmMainEntry
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(479, 328);
+            this.ClientSize = new System.Drawing.Size(479, 355);
             this.Controls.Add(this.btnChangeDB);
             this.Controls.Add(this.txtDBPath);
             this.Controls.Add(this.label8);

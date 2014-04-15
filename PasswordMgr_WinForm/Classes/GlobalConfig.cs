@@ -15,37 +15,60 @@ namespace PasswordMgr_WinForm
 
         const string gConfigFileLocation = "PasswordMgr.ini";
 
-        public static readonly string DefaultDBPath = ".\\Data\\pdb.db";
+        private static readonly string DefaultDBPath = ".\\Data\\pdb.db";
 
-        public static string LoadConfig()
+        private static string _DatabaseFileURL; // The database that to be connected.
+        public static string DatabaseFileURL
         {
-            string result = "";
+            get { return _DatabaseFileURL; }
+        }
 
-            // When user run this app at the first time, the config file .ini doesn't exist.
-            FileInfo configFile = new FileInfo(gConfigFileLocation);
-            if (configFile.Exists)
+        public static void LoadConfig()
+        {
+            try
             {
-                XDocument xdoc = XDocument.Load(gConfigFileLocation);
-                XElement dbPathElement = xdoc.Root.Element("DBPath");
-                if (dbPathElement != null)
-                    result = dbPathElement.Value;
-#if DEBUG
-                else
-                    DialogHelper.ShowMessage(string.Format("Didn't found the DBPath element in file '{0}'.", configFile.FullName), "LoadConfig");
-#endif
-            }
-            else
-            {
-                FileInfo dbInfo = new FileInfo(DefaultDBPath);
-                if (dbInfo.Exists)
+                string result = "";
+
+                // When user run this app at the first time, the config file .ini doesn't exist.
+                FileInfo configFile = new FileInfo(gConfigFileLocation);
+                if (configFile.Exists)
                 {
-                    string fullpath = dbInfo.FullName;
-                    SaveConfig(fullpath);
-                    result = fullpath;
+                    XDocument xdoc = XDocument.Load(gConfigFileLocation);
+                    XElement dbPathElement = xdoc.Root.Element("DBPath");
+                    if (dbPathElement != null)
+                        result = dbPathElement.Value;
+                    else
+                        DialogHelper.ShowMessage(string.Format("Didn't find the DBPath element in file '{0}'.", configFile.FullName), "LoadConfig");
                 }
-            }
+                else
+                {
+                    FileInfo dbInfo = new FileInfo(DefaultDBPath);
+                    if (dbInfo.Exists)
+                    {
+                        // Copy the db file to ~/Documents/PasswordMgr
+                        string userDocuments = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                        DirectoryInfo dirInfo = new DirectoryInfo(userDocuments);
+                        if (dirInfo.Exists)
+                        {
+                            var subDirInfo = dirInfo.CreateSubdirectory("PasswordMgr");
 
-            return result;
+                            string destDBFile = subDirInfo.FullName + "\\" + dbInfo.Name;
+                            File.Copy(dbInfo.FullName, destDBFile, true);
+
+                            SaveConfig(destDBFile);
+                            result = destDBFile;
+                        }
+                    }
+                    else
+                        DialogHelper.ShowMessage("Didn't find the original database file at '" + dbInfo.FullName + "'", "LoadConfig");
+                }
+
+                _DatabaseFileURL = result;
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ShowExcetion(ex, "LoadConfig");
+            }
         }
 
         public static bool SaveConfig(string dbfileurl)

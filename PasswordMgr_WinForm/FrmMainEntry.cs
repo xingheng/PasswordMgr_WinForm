@@ -59,7 +59,7 @@ namespace PasswordMgr_WinForm
 
             if (IsInsertMode)
             {
-                string dbFile = GlobalConfig.LoadConfig();
+                string dbFile = GlobalConfig.DatabaseFileURL;
                 txtDBPath.Text = dbFile;
                 viewModel.InitDatabase(dbFile);
 

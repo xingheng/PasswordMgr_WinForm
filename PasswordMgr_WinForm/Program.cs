@@ -17,6 +17,8 @@ namespace PasswordMgr_WinForm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            GlobalConfig.LoadConfig();
+
             FrmMainEntry frm = new FrmMainEntry();
             frm.OnFormEntityClosing += () =>
             {
